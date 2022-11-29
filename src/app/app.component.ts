@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'temperature-and-humidity-control';
+  title = 'temperature-and-humedity-control';
 }
