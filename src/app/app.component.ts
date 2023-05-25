@@ -9,7 +9,7 @@ import { SerialPort } from 'serialport';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'temperature-and-humedity-control';
+  title = 'temperature-and-humidity-control';
   first = 0;
   rows = 10;
 

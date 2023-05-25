@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy-pages":"ng build --base-href https://acardozo10.github.io/temperature-and-humidity-control/ && npx angular-cli-ghpages --dir=dist/temperature-and-humidity-control"
   },
   "private": true,
   "dependencies": {
