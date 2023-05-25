@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   .card {
-    width: 80%;
+    width: 100%;
     margin: 20px 0px;
 
     .table-header {
@@ -13,5 +13,95 @@
         justify-content: center;
         align-items: center;
     }
+  }
+  .parametros-limites{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    width: 100% !important;
+
+  }
+
+  .parametros-limites{
+    width: 100% !important;
+    ::ng-deep {
+      .p-tabview-panel{
+        width: 100% !important;
+      }
+    }
+    .controls{
+      padding: 10px;
+    }
+    .cbuttons{
+      padding: 10px;
+    }
+    .form-limites{
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;;
+      .controls{
+        width: 50%;
+      }
+      .cbuttons{
+        width: 100%;;
+      }
+    }
+  }
+  .grafica{
+    width: 100% !important;
+    display: flex !important;
+    flex-flow: wrap !important;
+    justify-content: center !important;
+    ::ng-deep{
+      .p-tabview-panel{
+        width: 78% !important;
+
+      }
+    }
+
+  }
+  ::ng-deep {
+    .tiempo-real{
+      display: flex;
+      padding: 40px;
+      align-content: center;
+      text-align: center;
+    }
+    .temperatura {
+      color: whitesmoke;
+      padding: 50px;
+      text-align: center;
+      margin: 30px;
+      display: block ;
+      border:1px solid #cf9c4f;
+      border-radius: 10px;
+      font-size: 60px !important ;
+      font-weight: bold !important;
+      width: 50%;
+      height: 300px;
+      background-color: #cf9c4f;
+      box-shadow: 5px 5px 15px #3D3D3D;
+    }
+
+    .humedad{
+      padding: 50px;
+      margin: 30px;
+      border:1px solid #124977;
+      align-content: center;
+      border-radius: 10px;
+      font-size: 60px !important ;
+      font-weight: bold !important;
+      width: 50%;
+      height: 300px;
+      background-color: #124977;
+      box-shadow: 5px 5px 15px #3D3D3D;
+      color:whitesmoke;
+    }
+  }
+  .param-limit{
+    float: left;
+    width: 50%;
+    height: 300px !important;
   }
 }

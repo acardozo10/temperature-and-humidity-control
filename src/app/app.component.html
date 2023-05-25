@@ -1,43 +1,126 @@
 <div class="container">
+  <p-tabView style="width: 100%;">
+    <p-tabPanel header="Tiempo Real">
+      <div class="tiempo-real">
+        <div class="temperatura">TEMPERATURA <br>{{temperatura}} °C</div>
+        <div class="humedad">HUMEDAD <br>{{humedad}} %</div>
+      </div>
 
-  <div class="card">
-    <div class="table-header">
-      <h3>Registro de control de temperatura y humedad
-      </h3>
-      <p-button type="button" icon="pi pi-refresh" styleClass="p-button-text" (click)="refreshData();"></p-button>
-    </div>
-    <p-table [value]="tableData" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-      [tableStyle]="{'min-width': '20rem'}"
-      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} filas" [rowsPerPageOptions]="[10,25,50]">
-      <ng-template pTemplate=" header">
-        <tr>
-          <th pSortableColumn="code" style="width:20%">idDispositivo <p-sortIcon field="code"></p-sortIcon>
-          </th>
-          <th pSortableColumn="name" style="width:20%">temperatura <p-sortIcon field="name"></p-sortIcon>
-          </th>
-          <th pSortableColumn="category" style="width:20%">humedad <p-sortIcon field="category"></p-sortIcon>
-          </th>
-          <th pSortableColumn="quantity" style="width:20%">fecha <p-sortIcon field="quantity"></p-sortIcon>
-          </th>
-          <th pSortableColumn="price" style="width:20%">hora <p-sortIcon field="price"></p-sortIcon>
-          </th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-product>
-        <tr>
-          <td>{{product.idDispositivo}}</td>
-          <td>{{product.temperatura}}</td>
-          <td>{{product.humedad}}</td>
-          <td>{{product.fecha}}</td>
-          <td>{{product.hora }}</td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+    </p-tabPanel>
+    <p-tabPanel header="Datos">
+      <div class="card">
+        <div class="table-header">
+          <h3>Registro de control de temperatura y humedad
+          </h3>
+          <p-button type="button" icon="pi pi-refresh" styleClass="p-button-text" (click)="refreshData();"></p-button>
+        </div>
+        <p-table [value]="tableData" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+          [tableStyle]="{'min-width': '20rem'}"
+          currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} filas"
+          [rowsPerPageOptions]="[5,10,25,50]">
+          <ng-template pTemplate=" header">
+            <tr>
+              <th pSortableColumn="Dispositivo" style="width:20%">Dispositivo <p-sortIcon
+                  field="Dispositivo"></p-sortIcon>
+              </th>
+              <th pSortableColumn="temperaturA_REAL" style="width:20%">Temperatura <p-sortIcon
+                  field="temperaturA_REAL"></p-sortIcon>
+              </th>
+              <th pSortableColumn="humedaD_REAL" style="width:20%">Humedad <p-sortIcon
+                  field="humedaD_REAL"></p-sortIcon>
+              </th>
+              <th pSortableColumn="fecha" style="width:20%">Fecha <p-sortIcon field="fecha"></p-sortIcon>
+              </th>
+              <th pSortableColumn="fecha" style="width:20%">Hora <p-sortIcon field="fecha"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data>
+            <tr>
+              <td>{{data.dispositivo}}</td>
+              <td>{{data.temperaturA_REAL}}</td>
+              <td>{{data.humedaD_REAL}}</td>
+              <td>{{data.fecha.toString().split('T')[0]}}</td>
+              <td>{{data.fecha.toString().split('T')[1]}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Grafica" class="grafica">
+      <div class="card">
+        <h4>Grafica de valores con intervalos entre 2-5m</h4>
+        <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Parametros y límites" class="parametros-limites">
 
-  <div class="card">
-    <h4>Grafica de valores con intervalos entre 2-5m</h4>
-    <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
-  </div>
+      <div>
+        <p-fieldset legend="Parametros" class="param-limit">
+          <p class="m-0">
+            <span>Valor Correción temperatura: </span> {{this.parametros?.valorCalibracionTemperatura}}
+            <br>
+            <span>Valor Correción humedad:</span> {{this.parametros?.valorCalibracionHumedad}}
+            <br>
+            <br>
+            <br>
 
+          </p>
+        </p-fieldset>
+        <p-fieldset legend="Límites" class="param-limit">
+          <p class="m-0">
+            <span>Límite mínimo temperatura: </span> {{this.limites?.tempMinLimit}}
+            <br>
+            <span>Límite máximo temperatura:</span> {{this.limites?.tempMaxLimit}}
+            <br>
+            <span>Límite mínimo humedad: </span> {{this.limites?.hmdMinLimit}}
+            <br>
+            <span>Límite máximo humedad:</span> {{this.limites?.hmdMaxLimit}}
+          </p>
+        </p-fieldset>
+      </div>
+      <div>
+        <p-fieldset legend="Parametros" class="param-limit">
+          <div [formGroup]="formParametros">
+            <div class="controls">
+              <label>Valor corrección temperatura</label><br>
+              <input type="text" formControlName="tmpCorreccion">
+            </div>
+            <div class="controls">
+              <label>Valor corrección humeddad</label><br>
+              <input type="text" formControlName="hmdCorreccion">
+            </div>
+            <div class="cbuttons">
+              <p-button [disabled]="formParametros.invalid" label="guardar" (click)="guardarCorreccion()"
+                styleClass="p-button-secondary"></p-button>
+            </div>
+          </div>
+        </p-fieldset>
+        <p-fieldset legend="Límites" class="param-limit">
+          <div class="form-limites" [formGroup]="formLimites">
+            <div class="controls">
+              <label>Valor mínimo temperatura</label><br>
+              <input type="text" formControlName="minTemp">
+            </div>
+            <div class="controls">
+              <label>Valor máximo temperatura</label><br>
+              <input type="text" formControlName="maxTemp">
+            </div>
+            <div class="controls">
+              <label>Valor mínimo humedad</label><br>
+              <input type="text" formControlName="minHum">
+            </div>
+            <div class="controls">
+              <label>Valor máximo humeddad</label><br>
+              <input type="text" formControlName="maxHum">
+            </div>
+          </div>
+          <div class="cbuttons">
+            <p-button [disabled]="formLimites.invalid" label="guardar" (click)="guardarLimites()"
+              styleClass="p-button-secondary"></p-button>
+          </div>
+        </p-fieldset>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
 </div>
