@@ -47,16 +47,16 @@
         </p-table>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="Grafica" class="grafica">
+    <p-tabPanel header="Gráfica" class="grafica">
       <div class="card">
-        <h4>Grafica de valores con intervalos entre 2-5m</h4>
+        <h4>Gráfica de valores con intervalos entre 2-5m</h4>
         <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="Parametros y límites" class="parametros-limites">
+    <p-tabPanel header="Parámetros y límites" class="parametros-limites">
 
       <div>
-        <p-fieldset legend="Parametros" class="param-limit">
+        <p-fieldset legend="Parámetros" class="param-limit">
           <p class="m-0">
             <span>Valor Correción temperatura: </span> {{this.parametros?.valorCalibracionTemperatura}}
             <br>
@@ -80,7 +80,7 @@
         </p-fieldset>
       </div>
       <div>
-        <p-fieldset legend="Parametros" class="param-limit">
+        <p-fieldset legend="Parámetros" class="param-limit">
           <div [formGroup]="formParametros">
             <div class="controls">
               <label>Valor corrección temperatura</label><br>
